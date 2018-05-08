@@ -1,0 +1,14 @@
+RUN	apk -Uuvv add --no-cache git \
+	build-base linux-headers \ 
+	nodejs-npm nodejs-dev nodejs && \
+	rm -rf /root/.cache && \
+	rm -rf /tmp/* && \
+	rm -rf /var/cache/apk/*
+USER ctrl
+WORKDIR /ctrl
+ENV NPM_CONFIG_PREFIX=/node
+RUN npm config set package-lock false && \
+    git clone https://github.com/design-first/system-designer.git && \
+    cd system-designer && \
+    npm i && \
+    npm run web

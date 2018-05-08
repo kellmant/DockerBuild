@@ -1,0 +1,39 @@
+FROM alpine:latest
+MAINTAINER kellman
+USER root
+COPY certs /usr/local/share/ca-certificates/
+RUN apk -Uuvv add --no-cache curl openssl tini tzdata ca-certificates && \
+	addgroup -g 253 fleet && \
+	addgroup -g 500 core && \
+	addgroup -g 600 units && \
+	addgroup -g 700 boss && \
+	addgroup -g 800 media && \
+	addgroup -g 900 web && \
+	addgroup -g 1000 git && \
+	adduser -D ctrl -u 500 -g controller -G core -s /bin/bash -h /ctrl && \
+	addgroup ctrl fleet && \
+	addgroup ctrl units && \
+	addgroup ctrl boss && \
+	addgroup ctrl media && \
+	addgroup ctrl web && \
+	adduser -S -u 602 -G units -H irc && \
+	adduser -S -u 800 -G media -H plex && \
+	adduser -S -u 802 -G media -H shows && \
+	adduser -S -u 803 -G media -H movies && \
+	adduser -S -u 804 -G media -H music && \
+	adduser -S -u 805 -G media -H sab && \
+	adduser -S -u 806 -G media -H torrent && \
+	adduser -S -u 901 -G web -H hexo && \
+	adduser -S -u 902 -G web -H blog && \
+	adduser -S -u 903 -G web -H wordpress && \
+	adduser -S -u 904 -G web -H node && \
+	adduser -S -u 1000 -G git -H git && \
+   	mkdir -p /ctrl && chown -R ctrl.core /ctrl && \
+   	mkdir -p /socket && chown -R ctrl.core /socket && \
+   	mkdir -p /web && chown -R ctrl.core /web && \
+   	mkdir -p /node && chown -R ctrl.core /node && \
+   	mkdir -p /ca && chown -R ctrl.core /ca && \
+	update-ca-certificates && \
+	rm -rf /root/.cache && \
+	rm -rf /tmp/* && \
+	rm -rf /var/cache/apk/*

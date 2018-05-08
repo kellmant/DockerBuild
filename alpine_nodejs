@@ -1,0 +1,13 @@
+RUN	apk -Uuvv add --no-cache git \
+	python py-pip jq build-base linux-headers \ 
+	binutils musl musl-dev go nodejs-npm nodejs-dev nodejs && \
+	pip install --upgrade pip && \
+	pip install awscli && \
+    pip install s3cmd && \
+	rm -rf /root/.cache && \
+	rm -rf /tmp/* && \
+	rm -rf /var/cache/apk/*
+USER ctrl
+ENV NPM_CONFIG_PREFIX=/node
+RUN npm config set package-lock false && \
+   	npm install -g yoda-said 

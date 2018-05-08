@@ -1,0 +1,23 @@
+ENV NPM_CONFIG_PREFIX=/node PATH=/node/bin:$PATH
+RUN	echo -n "Gateway In The Sky Project " > /etc/motd && \
+	echo -n "Securing Labs cpdeploy Shell [Alpine:latest] " >> /etc/motd && \
+	echo "overlaynetwork[TRUSTED] " >> /etc/motd && \
+	echo " " >> /etc/motd && \
+	apk -Uuvv add --no-cache emacs git bash ncurses-terminfo perl \
+	python py-pip python-dev zip util-linux coreutils findutils grep cmake llvm \
+	jq tree groff less build-base linux-headers fontconfig openssl-dev libstdc++ \ 
+	bc vim dialog ncurses ncurses-libs ncurses-terminfo libevent tmux openssh binutils xdg-utils \
+ 	rsync musl go nodejs-npm nodejs graphviz ttf-droid ttf-droid-nonlatin openjdk8-jre && \
+    pip install --upgrade pip && \
+    pip install awscli && \
+   	pip install aws-shell && \
+   	pip install s3cmd && \
+   	pip install TermRecord && \
+   	pip install Jinja2 && \
+   	su ctrl -c "npm install -g renv" && \
+    su ctrl -c "npm install -g ec2-tool" && \
+    su ctrl -c "npm install -g awsops" && \
+	apk del --purge build-base linux-headers musl-dev nodejs-dev && \
+    rm -rf /root/.cache && \
+    rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/*

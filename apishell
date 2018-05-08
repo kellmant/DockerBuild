@@ -1,0 +1,54 @@
+RUN \
+	echo -n "Gateway In The Sky Project " > /etc/motd && \
+	echo -n "Securing Labs Ninja Dev Shell [Alpine:latest] " >> /etc/motd && \
+	echo "overlaynetwork[TRUSTED] " >> /etc/motd && \
+	echo " " >> /etc/motd && \
+	apk -Uuvv add --no-cache emacs git \
+	python py-pip zip util-linux coreutils findutils grep \
+	jq tree groff less build-base linux-headers fontconfig openssl-dev \ 
+	bc vim dialog ncurses ncurses-libs ncurses-terminfo libevent tmux openssh binutils xdg-utils \
+ 	rsync musl musl-dev go nodejs-npm nodejs-dev nodejs graphviz ttf-droid ttf-droid-nonlatin openjdk8-jre && \
+	    pip install --upgrade pip && \
+        pip install powerline-status && \
+	    pip install awscli && \
+    	pip install aws-shell && \
+    	pip install s3cmd && \
+    	pip install TermRecord && \
+    	pip install Jinja2 && \
+    	npm install -g renv && \
+    	npm install -g node-etcd && \
+    	npm install -g es-etcd-watcher && \
+    	npm install -g furthermore && \
+    	npm install -g gitbook-cli && \
+    	npm install -g node-plantuml && \
+    	npm install -g ec2-tool && \
+    	npm install -g awsops && \
+    	npm install -g yoda-said && \
+	echo "Node Modules available" >> /etc/motd && \
+	echo "renv: https://www.npmjs.com/package/renv " >> /etc/motd && \
+	echo "gitbook: https://www.npmjs.com/package/gitbook " >> /etc/motd && \
+	echo "node-etcd: https://www.npmjs.com/package/node-etcd " >> /etc/motd && \
+	echo "es-etcd-watcher: https://www.npmjs.com/package/es-etcd-watcher " >> /etc/motd && \
+	echo "furthermore: https://www.npmjs.com/package/furthermore " >> /etc/motd && \
+	echo "dockerfile-guru: https://www.npmjs.com/package/dockerfile-guru " >> /etc/motd && \
+	echo "fleet-templater: https://www.npmjs.com/package/fleet-templater " >> /etc/motd && \
+	echo "ttystudio: https://www.npmjs.com/package/ttystudio " >> /etc/motd && \
+	echo "node-plantuml: https://www.npmjs.com/package/node-plantuml " >> /etc/motd && \
+	#echo "json-to-plantuml: https://www.npmjs.com/package/json-to-plantuml " >> /etc/motd && \
+	echo "ec2-tool: https://www.npmjs.com/package/ec2-tool " >> /etc/motd && \
+	echo "awsops: https://www.npmjs.com/package/awsops " >> /etc/motd && \
+    echo " " >> /etc/motd && \
+    echo "You can install your own modules with 'npm install <http://www.npmjs.com> --save' " >> /etc/motd && \
+    echo " " >> /etc/motd && \
+    echo "Set your public_html output to /web in _config to review at Blog url (private to seclab users)" >> /etc/motd && \
+    echo "Read more about hexo CLI to generate system blog output." >> /etc/motd && \
+    echo "To record a session running 'recordme' will start a movie capture of the shell session. " >> /etc/motd && \
+    echo "Run 'exit' to stop recording session. Default output is to SysBlog" >> /etc/motd && \
+    echo " " >> /etc/motd && \
+    echo "run 'helpme' to see this message again, run 'versions' to check the shell tool versions." >> /etc/motd && \
+    echo " " >> /etc/motd && \
+	apk del --purge build-base linux-headers \
+	musl-dev nodejs-dev && \
+	rm -rf /root/.cache && \
+	rm -rf /tmp/* && \
+	rm -rf /var/cache/apk/*

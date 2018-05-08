@@ -1,0 +1,17 @@
+RUN \
+	apk -Uuvv add --no-cache bash \
+	python py-pip zip jq build-base linux-headers && \ 
+	    pip install --upgrade pip && \
+	    pip install awscli && \
+	    pip install s3cmd && \
+	mkdir -p /tmp/build && cd /tmp/build && \
+	curl -L https://github.com/coreos/etcd/releases/download/v3.1.8/etcd-v3.1.8-linux-amd64.tar.gz -o etcd-v3.1.8-linux-amd64.tar.gz && \
+	tar xzvf etcd-v3.1.8-linux-amd64.tar.gz && cd etcd-v3.1.8-linux-amd64 && \
+	cp ./etcdctl /usr/bin/ && cd /tmp/build && \
+	curl -L https://github.com/coreos/fleet/releases/download/v0.11.8/fleet-v0.11.8-linux-amd64.tar.gz -o fleet.tar.gz && \
+	tar xzvf fleet.tar.gz && cd fleet-v0.11.8-linux-amd64 && \
+	cp ./fleetctl /usr/bin/ && cd / && \
+	apk del --purge build-base linux-headers && \
+	rm -rf /root/.cache && \
+	rm -rf /tmp/* && \
+	rm -rf /var/cache/apk/*

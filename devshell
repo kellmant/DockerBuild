@@ -1,0 +1,51 @@
+RUN	mkdir -p /node && chown -R ctrl /node && \
+    echo -n "Gateway In The Sky Project " > /etc/motd && \
+	echo -n "Securing Labs Ninja Dev Shell [Alpine:latest] " >> /etc/motd && \
+	echo "overlaynetwork[TRUSTED] " >> /etc/motd && \
+	echo " " >> /etc/motd && \
+	echo "NodeJS Tools " >> /etc/motd && \
+	echo "Learn Node: https://www.npmjs.com/package/learnyounode " >> /etc/motd && \
+	echo "renv: https://www.npmjs.com/package/renv " >> /etc/motd && \
+	echo "Hexo Blog: https://www.npmjs.com/package/hexo " >> /etc/motd && \
+	echo "PUML Diagrams: https://www.npmjs.com/package/node-plantuml " >> /etc/motd && \
+	echo "Explorer CLI: https://www.npmjs.com/package/explorer-cli " >> /etc/motd && \
+	echo "newman: https://www.npmjs.com/package/autotest-engine " >> /etc/motd && \
+	echo " " >> /etc/motd && \
+	echo "run 'thesituation' to see ninja shell state " >> /etc/motd && \
+	echo " " >> /etc/motd && \
+	echo "For additional information => http://ninja.seclab.help " >> /etc/motd && \
+	echo " " >> /etc/motd && \
+	apk -Uuvv add --no-cache emacs git \
+	python py-pip zip util-linux coreutils findutils grep \
+	jq tree groff less build-base linux-headers fontconfig openssl-dev \ 
+	bc vim dialog ncurses ncurses-libs ncurses-terminfo libevent tmux openssh binutils xdg-utils \
+ 	rsync musl musl-dev go nodejs-npm nodejs-dev nodejs graphviz ttf-droid ttf-droid-nonlatin openjdk8-jre && \
+	pip install --upgrade pip && \
+    pip install powerline-status && \
+	pip install awscli && \
+    pip install aws-shell && \
+    pip install s3cmd && \
+    pip install TermRecord && \
+    pip install Jinja2 && \
+	rm -rf /root/.cache && \
+	rm -rf /tmp/* && \
+	rm -rf /var/cache/apk/*
+USER ctrl
+ENV NPM_CONFIG_PREFIX=/node
+RUN npm config set package-lock false && \
+    npm install -g learnyounode && \
+   	npm install -g renv && \
+    npm install -g explorer-cli && \
+   	npm install -g es-etcd-watcher && \
+   	npm install -g furthermore && \
+   	npm install -g dockerfile-guru && \
+   	npm install -g fleet-templater && \
+   	npm install -g hexo-cli && \
+   	npm install -g node-plantuml && \
+   	npm install -g ec2-tool && \
+   	npm install -g awsops && \
+   	npm install -g sync53 && \
+    npm install -g dynroute && \
+    npm install -g newman && \
+   	npm install -g yoda-said 
+USER root
