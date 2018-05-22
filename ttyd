@@ -21,4 +21,3 @@ RUN apk add --update --no-cache \
  && apk del --purge build-base cmake g++ autoconf automake bsd-compat-headers yarn libtool \
  && rm -rf /tmp/* \
  && rm -rf /var/cache/apk/*
-ENV TERM=screen-256color

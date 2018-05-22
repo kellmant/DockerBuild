@@ -42,4 +42,4 @@ RUN apk -Uuvv add --no-cache curl openssl tini tzdata ca-certificates && \
 	tar xzvf fleet.tar.gz && cd fleet-v0.11.8-linux-amd64 && \
 	cp ./fleetctl /usr/bin/ && \
     cd / && rm -rf /tmp/build
-ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+#ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin

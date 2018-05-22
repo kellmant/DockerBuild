@@ -3,15 +3,13 @@ RUN	mkdir -p /node && chown -R ctrl /node && \
 	echo -n "Securing Labs Ninja Dev Shell [Alpine:latest] " >> /etc/motd && \
 	echo "overlaynetwork[TRUSTED] " >> /etc/motd && \
 	echo " " >> /etc/motd && \
-	echo "NodeJS Tools " >> /etc/motd && \
+	echo "NodeJS Tools you can install with npm :" >> /etc/motd && \
 	echo "Learn Node: https://www.npmjs.com/package/learnyounode " >> /etc/motd && \
 	echo "renv: https://www.npmjs.com/package/renv " >> /etc/motd && \
 	echo "Hexo Blog: https://www.npmjs.com/package/hexo " >> /etc/motd && \
 	echo "PUML Diagrams: https://www.npmjs.com/package/node-plantuml " >> /etc/motd && \
-	echo "Explorer CLI: https://www.npmjs.com/package/explorer-cli " >> /etc/motd && \
-	echo "newman: https://www.npmjs.com/package/autotest-engine " >> /etc/motd && \
 	echo " " >> /etc/motd && \
-	apk -Uuvv add --no-cache emacs git \
+	apk -Uuvv add --no-cache git \
 	python py-pip zip util-linux coreutils findutils grep \
 	jq tree groff less build-base linux-headers fontconfig openssl-dev \ 
 	bc vim dialog ncurses ncurses-libs ncurses-terminfo libevent tmux openssh binutils xdg-utils \
@@ -29,5 +27,7 @@ RUN	mkdir -p /node && chown -R ctrl /node && \
 USER ctrl
 ENV NPM_CONFIG_PREFIX=/node
 RUN npm config set package-lock false && \
+    npm install -g npm && \
+    npm update -g && \
    	npm install -g yoda-said 
 USER root
